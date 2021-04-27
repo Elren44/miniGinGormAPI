@@ -20,8 +20,12 @@ func GetAllToDo(c *gin.Context) {
 
 func PostNewToDo(c *gin.Context) {
 	var todo models.ToDo
-	c.BindJSON(&todo)
-	err := models.AddNewToDo(&todo)
+	err := c.BindJSON(&todo)
+	if err != nil {
+		helpers.WriteJSON(c, 400, "json is invalid")
+		return
+	}
+	err = models.AddNewToDo(&todo)
 	if err != nil {
 		helpers.WriteJSON(c, 404, todo)
 		return
