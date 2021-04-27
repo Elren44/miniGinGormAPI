@@ -18,7 +18,7 @@ func main() {
 	dsn := "host=localhost port=5432 user=postgres password=... dbname=myTest sslmode=disable"
 	storage.DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Println("Error while accessing database")
+		log.Fatal("Error while accessing database :", err)
 	}
 	storage.DB.AutoMigrate(&models.ToDo{})
 

@@ -51,7 +51,11 @@ func UpdateToDoById(c *gin.Context) {
 		helpers.WriteJSON(c, 404, "invalid id format. Try again")
 		return
 	}
-	c.BindJSON(&todo)
+	err = c.BindJSON(&todo)
+	if err != nil {
+		helpers.WriteJSON(c, 400, "json is invalid")
+		return
+	}
 	err = models.UpdateToDoById(&todo, id)
 	if err != nil {
 		helpers.WriteJSON(c, 404, todo)
