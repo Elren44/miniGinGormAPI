@@ -7,9 +7,8 @@ import (
 )
 
 type Message struct {
-	StatusCode int `json:"status_code"`
-	//Meta       interface{} `json:"meta"`
-	Data interface{} `json:"data"`
+	StatusCode int         `json:"status_code"`
+	Data       interface{} `json:"data"`
 }
 
 func WriteJSON(c *gin.Context, statusCode int, data interface{}) {
